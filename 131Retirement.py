@@ -27,7 +27,11 @@ for step in range (2):
     circle_num = circle_num + 1
 
 #-----Make text------
-t.
+t.Turtle()
+font_setup = ("Arial", 40, "normal")
+t.penup()
+t.pengoto
+t.write("Level 1: Easy", font = font_setup)
 
 
 wn.mainloop()
