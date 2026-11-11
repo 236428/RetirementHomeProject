@@ -1,37 +1,121 @@
 import turtle as t
 
+rbutton = t.Turtle()
+bbutton = t.Turtle()
+gbutton = t.Turtle()
+conbutton = t.Turtle()
+cookbutton = t.Turtle()
+mesbutton = t.Turtle()
+
+writer = t.Turtle()
+painter = t.Turtle()
 wn = t.Screen()
 wn.setup(width = 800, height = 600)
-
-#t.circle(50)
-
-circle_colors = ["lightblue", "lightgreen"]
-circle_num = 0
+writer.hideturtle()
+painter.hideturtle()
+conbutton.hideturtle()
+mesbutton.hideturtle()
+cookbutton.hideturtle()
 
 #-------Make buttons-------
-t.fillcolor("lightcoral")
-t.penup()
-t.goto(-275, -250)
-t.pendown()
-t.begin_fill()
-t.circle(75)
-t.end_fill()
-for step in range (2):  
-    t.fillcolor(circle_colors[circle_num])
-    t.penup()
-    t.forward(262.5)
-    t.pendown()
-    t.begin_fill()
-    t.circle(75)
-    t.end_fill()
-    circle_num = circle_num + 1
+rbutton.shape("circle")
+rbutton.color("black", "lightcoral")
+bbutton.shape("circle")
+bbutton.color("black", "lightblue")
+gbutton.shape("circle")
+gbutton.color("black", "lightgreen")
 
-#-----Make text------
-t.Turtle()
+rbutton.shapesize(stretch_wid=8, stretch_len=8)
+rbutton.speed(0)
+bbutton.shapesize(stretch_wid=8, stretch_len=8)
+bbutton.speed(0)
+gbutton.shapesize(stretch_wid=8, stretch_len=8)
+gbutton.speed(0)
+
+rbutton.penup()
+rbutton.goto(-275, -185)
+bbutton.penup()
+bbutton.goto(0, -185)
+gbutton.penup()
+gbutton.goto(275, -185)
+
+
+#-----Make homescreen text------
 font_setup = ("Arial", 40, "normal")
-t.penup()
-t.pengoto
-t.write("Level 1: Easy", font = font_setup)
+writer.speed(0)
+writer.penup()
+writer.goto(-190,50)
+writer.write("Click One Button", font = font_setup)
+
+
+#-------clear screen and add background on button click---------
+def red_clicked(x,y):
+    writer.clear()
+    rbutton.hideturtle()
+    gbutton.hideturtle()
+    bbutton.hideturtle()
+    painter.penup()
+    painter.goto(-400,300)
+    painter.pencolor("lightcoral")
+    painter.fillcolor("lightcoral")
+    painter.begin_fill()
+    painter.speed(0)
+    for step in range(2):
+            painter.forward(800)
+            painter.right(90)
+            painter.forward(600)
+            painter.right(90)
+    painter.end_fill()
+    conbutton.showturtle()
+    mesbutton.showturtle()
+    cookbutton.showturtle()
+
+def green_clicked(x,y):
+    writer.clear()
+    rbutton.hideturtle()
+    gbutton.hideturtle()
+    bbutton.hideturtle()
+    painter.penup()
+    painter.goto(-400,300)
+    painter.pencolor("lightgreen")
+    painter.fillcolor("lightgreen")
+    painter.begin_fill()
+    painter.speed(0)
+    for step in range(2):
+            painter.forward(800)
+            painter.right(90)
+            painter.forward(600)
+            painter.right(90)
+    painter.end_fill()
+    conbutton.showturtle()
+    mesbutton.showturtle()
+    cookbutton.showturtle()
+
+def blue_clicked(x,y):
+    writer.clear()
+    rbutton.hideturtle()
+    gbutton.hideturtle()
+    bbutton.hideturtle()
+    painter.penup()
+    painter.goto(-400,300)
+    painter.pencolor("lightblue")
+    painter.fillcolor("lightblue")
+    painter.begin_fill()
+    painter.speed(0)
+    for step in range(2):
+            painter.forward(800)
+            painter.right(90)
+            painter.forward(600)
+            painter.right(90)
+    painter.end_fill()
+    conbutton.showturtle()
+    mesbutton.showturtle()
+    cookbutton.showturtle()
+
+
+rbutton.onclick(red_clicked)
+bbutton.onclick(blue_clicked)
+gbutton.onclick(green_clicked)
 
 
 wn.mainloop()
