@@ -1,6 +1,6 @@
 import turtle as t
 import random
-from playsound import playsound
+from playsound3 import playsound
 
 rbutton = t.Turtle()
 bbutton = t.Turtle()
@@ -8,9 +8,11 @@ gbutton = t.Turtle()
 conbutton = t.Turtle()
 cookbutton = t.Turtle()
 mesbutton = t.Turtle()
+cookie = t.Turtle()
 
 writer = t.Turtle()
 painter = t.Turtle()
+index = 0
 wn = t.Screen()
 wn.setup(width = 800, height = 600)
 writer.hideturtle()
@@ -18,8 +20,13 @@ painter.hideturtle()
 conbutton.hideturtle()
 mesbutton.hideturtle()
 cookbutton.hideturtle()
+cookie.hideturtle()
 
+messages = ["Have a good day!", "You are looking young today!", "Have a relaxing day!", "Sending smiles your way!", "You are thought of and appreciated!", "Just a note to brighten your day!"]
+random.shuffle(messages)
+message = messages[0]
 random_color = ["aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige", "bisque", "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue", "chartreuse", "coral", "cornflowerblue", "crimson", "cyan", "darkblue", "darkcyan", "darkgoldenrod", "darkgray", "darkgreen", "darkgrey", "darkkhaki", "darkmagenta", "darkolivegreen", "darkorange", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick", "floralwhite", "forestgreen", "fuchsia", "gainsboro", "ghostwhite", "gold", "goldenrod", "gray", "green", "greenyellow", "grey", "honeydew", "indianred", "indigo", "ivory", "khaki", "lavender", "lavenderblush", "lawngreen", "lemonchiffon", "lightblue", "lightcoral", "lightcyan", "lightgoldenrodyellow", "lightgray", "lightgreen", "lightgrey", "lightpink", "lightsalmon", "lightseagreen", "lightskyblue", "lightslategray", "lightslategrey", "lightsteelblue", "lightyellow", "lime", "limegreen", "linen", "magenta", "maroon", "mediumaquamarine", "mediumblue", "mediumorchid", "mediumpurple", "mediumseagreen", "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred", "midnightblue", "mintcream", "mistyrose", "moccasin", "navajowhite", "navy", "oldlace", "olive", "olivedrab", "orange", "orangered", "orchid", "palegoldenrod", "palegreen", "paleturquoise", "palevioletred", "papayawhip", "peachpuff", "peru", "plum", "powderblue", "purple", "red", "rosybrown", "royalblue", "saddlebrown", "salmon", "sandybrown", "seagreen", "seashell", "sienna", "silver", "skyblue", "slateblue", "slategray", "slategrey", "snow", "springgreen", "steelblue", "tan", "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whitesmoke", "yellow", "yellowgreen"]
+cookies = ["full_cookie.gif", "1bitecookie.gif", "2bitecookie.gif"]
 
 #-------Make buttons-------
 rbutton.shape("circle")
@@ -163,8 +170,45 @@ def conclicked(x,y):
     painter.pensize(1)
     painter.speed(5)
 
+def mesclicked(x,y):
+      writer.clear()
+      conbutton.hideturtle()
+      mesbutton.hideturtle()
+      cookbutton.hideturtle()
+      writer.goto(-240,50)
+      writer.write(f"{message}", font= ("Arial", 30, "normal"))
+
+def fcookie_oneclick(x,y):
+      wn.addshape(cookies[1])
+      cookie.shape(cookies[1])
+      index = index + 1
+
+def fcookie_twoclick(x,y):
+    wn.addshape(cookies[2])
+    cookie.shape(cookies[2])
+    index = index + 1
+      
+def cookclicked(x,y):
+      writer.clear()
+      conbutton.hideturtle()
+      mesbutton.hideturtle()
+      cookbutton.hideturtle()
+      cookie.goto(0,0)
+      wn.addshape(cookies[0])
+      cookie.shape(cookies[0])
+      cookie.showturtle()
+      if (index == 0):
+        cookie.onclick(fcookie_oneclick)
+      if (index == 1):
+           cookie.onclick(fcookie_twoclick)
+      if (index == 2):
+           cookie.hideturtle()
+
+
 
 conbutton.onclick(conclicked)
+mesbutton.onclick(mesclicked)
+cookbutton.onclick(cookclicked)
 
 wn.mainloop()
 
