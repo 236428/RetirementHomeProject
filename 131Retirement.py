@@ -21,12 +21,13 @@ conbutton.hideturtle()
 mesbutton.hideturtle()
 cookbutton.hideturtle()
 cookie.hideturtle()
+cookie_clicked = False
 
-messages = ["Have a good day!", "You are looking young today!", "Have a relaxing day!", "Sending smiles your way!", "You are thought of and appreciated!", "Just a note to brighten your day!"]
+messages = ["Have a good day!", "You are looking dapper today!", "Have a relaxing day!", "Sending smiles your way!", "You're thought of and appreciated!", "Here's a note to brighten your day!"]
 random.shuffle(messages)
 message = messages[0]
 random_color = ["aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige", "bisque", "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue", "chartreuse", "coral", "cornflowerblue", "crimson", "cyan", "darkblue", "darkcyan", "darkgoldenrod", "darkgray", "darkgreen", "darkgrey", "darkkhaki", "darkmagenta", "darkolivegreen", "darkorange", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick", "floralwhite", "forestgreen", "fuchsia", "gainsboro", "ghostwhite", "gold", "goldenrod", "gray", "green", "greenyellow", "grey", "honeydew", "indianred", "indigo", "ivory", "khaki", "lavender", "lavenderblush", "lawngreen", "lemonchiffon", "lightblue", "lightcoral", "lightcyan", "lightgoldenrodyellow", "lightgray", "lightgreen", "lightgrey", "lightpink", "lightsalmon", "lightseagreen", "lightskyblue", "lightslategray", "lightslategrey", "lightsteelblue", "lightyellow", "lime", "limegreen", "linen", "magenta", "maroon", "mediumaquamarine", "mediumblue", "mediumorchid", "mediumpurple", "mediumseagreen", "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred", "midnightblue", "mintcream", "mistyrose", "moccasin", "navajowhite", "navy", "oldlace", "olive", "olivedrab", "orange", "orangered", "orchid", "palegoldenrod", "palegreen", "paleturquoise", "palevioletred", "papayawhip", "peachpuff", "peru", "plum", "powderblue", "purple", "red", "rosybrown", "royalblue", "saddlebrown", "salmon", "sandybrown", "seagreen", "seashell", "sienna", "silver", "skyblue", "slateblue", "slategray", "slategrey", "snow", "springgreen", "steelblue", "tan", "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whitesmoke", "yellow", "yellowgreen"]
-cookies = ["full_cookie.gif", "1bitecookie.gif", "2bitecookie.gif"]
+cookies = ["1bitecookie.gif", "2bitecookie.gif"]
 
 #-------Make buttons-------
 rbutton.shape("circle")
@@ -157,16 +158,18 @@ def conclicked(x,y):
     conbutton.hideturtle()
     cookbutton.hideturtle()
     mesbutton.hideturtle()
-    for sprinkle in range(200):
+    playsound("confetti.mp3")
+    for sprinkle in range(100):
         x_position = random.randint(-400,400)
         y_position = random.randint(-300, 300)
         painter.penup()
-        painter.goto(int(x_position), int(y_position))
+        painter.teleport(int(x_position), int(y_position))
         painter.setheading(random.randint(0, 360))
         painter.pencolor(random.choice(random_color))
         painter.pensize(3)
         painter.pendown()
         painter.forward(10)
+    playsound("trumpet.mp3")
     painter.pensize(1)
     painter.speed(5)
 
@@ -175,18 +178,24 @@ def mesclicked(x,y):
       conbutton.hideturtle()
       mesbutton.hideturtle()
       cookbutton.hideturtle()
-      writer.goto(-240,50)
+      writer.goto(-240,0)
       writer.write(f"{message}", font= ("Arial", 30, "normal"))
+      playsound("cheering.mp3")
 
+
+index = 0
 def fcookie_oneclick(x,y):
-      wn.addshape(cookies[1])
-      cookie.shape(cookies[1])
-      index = index + 1
+    global index
+    if (index == 2):
+         cookie.hideturtle()
+         playsound("eating.mp3")
+         return
+    wn.addshape(cookies[index])
+    cookie.shape(cookies[index])
+    playsound("eating.mp3")
+    index += 1
+    index = min(2, index)
 
-def fcookie_twoclick(x,y):
-    wn.addshape(cookies[2])
-    cookie.shape(cookies[2])
-    index = index + 1
       
 def cookclicked(x,y):
       writer.clear()
@@ -194,21 +203,18 @@ def cookclicked(x,y):
       mesbutton.hideturtle()
       cookbutton.hideturtle()
       cookie.goto(0,0)
-      wn.addshape(cookies[0])
-      cookie.shape(cookies[0])
+      wn.addshape("full_cookie.gif")
+      cookie.shape("full_cookie.gif")
       cookie.showturtle()
-      if (index == 0):
-        cookie.onclick(fcookie_oneclick)
-      if (index == 1):
-           cookie.onclick(fcookie_twoclick)
-      if (index == 2):
-           cookie.hideturtle()
-
+      cookie.onclick(fcookie_oneclick)
 
 
 conbutton.onclick(conclicked)
 mesbutton.onclick(mesclicked)
 cookbutton.onclick(cookclicked)
+
+
+
 
 wn.mainloop()
 
